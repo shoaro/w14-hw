@@ -1,0 +1,33 @@
+const int analogPin=A0;
+ const int ledcount=10;
+ int ledPins[]={2,3,4,5,6,7,8,9,10,11};
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+
+for(int thisLed=0;thisLed<ledcount;thisLed++)
+{
+  pinMode(ledPins[thisLed],OUTPUT);
+  }
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+int xread=analogRead(A0);
+Serial.println(xread);
+delay(1);
+int iread=analogRead(analogPin);
+if(iread<100){iread=100;}
+if(iread>900){iread=900;}
+
+int ledLevel=map(iread,100,900,0,ledcount);
+for(int thisLed=0;thisLed<ledcount;thisLed++){
+  if(thisLed<ledLevel){
+     digitalWrite(ledPins[ thisLed],HIGH);
+    }
+    else
+    {
+     digitalWrite(ledPins[ thisLed],LOW);
+    }
+  }
+}
